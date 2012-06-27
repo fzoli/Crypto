@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Crypto</string>
+    <string name="sdShared">Az SD-kártya meg van osztva!</string>
+    <string name="needCryptsetup">/data/local/cryptsetup nem található</string>
+    <string name="listname">Listanév</string>
+    <string name="filePath">Fájl útvonala</string>
+    <string name="mountPath">Felcsattolás útvonala</string>
+    <string name="emptyList">A lista üres, hozzáadás a menüben.</string>
+    <string name="add">Hozzáadás</string>
+    <string name="mount">Felcsattol</string>
+    <string name="mounting">Felcsattolás...</string>
+    <string name="mountSuccess">Felcsattolás befejezve.</string>
+    <string name="mountFail">Sikertelen felcsattolás!</string>
+    <string name="umount">Leválaszt</string>
+    <string name="umountAll">Mindet leválaszt</string>
+    <string name="umounting">Leválasztás...</string>
+    <string name="umountSuccess">Leválasztás befejezve.</string>
+    <string name="umountFail">Sikertelen leválasztás!</string>
+    <string name="edit">Módosít</string>
+    <string name="delete">Töröl</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Mégsem</string>
+    <string name="password">Jelszó</string>
+    <string name="needPassword">Kérem, adjon meg érvényes jelszót.</string>
+    <string name="umounting:">Leválasztás:</string>
+    <string name="umountConfirmMsg">Biztos a leválasztásban?</string>
+    <string name="deleting:">Törlés:</string>
+    <string name="deleteConfirmMsg">Biztos a törlésben?</string>
+    <string name="yes">Igen</string>
+    <string name="no">Nem</string>
+    <string name="selectFile">Kérem, válasszon fájlt</string>
+    <string name="selectFolder">Kérem, válasszon könyvtárat</string>
+    <string name="useFolder">Használja ezt a könyvtárat</string>
+    <string name="installOIFM">Tallózáshoz telepítse a OI File Manager nevű programot.</string>
+    <string name="search">Tallóz</string>
+    <string name="existsMsg">Ilyen nevű bejegyzés már létezik.</string>
+    <string name="emptyNameMsg">A bejegyzés neve nem lehet üres.</string>
+    <string name="serviceNotify">Titkosított fájlrendszer van felcsattolva.</string>
+</resources>

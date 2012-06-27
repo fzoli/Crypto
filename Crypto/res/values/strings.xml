@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Crypto</string>
+    <string name="sdShared">SD-card is shared!</string>
+    <string name="needCryptsetup">/data/local/cryptsetup not found</string>
+    <string name="listname">Listname</string>
+    <string name="filePath">File path</string>
+    <string name="mountPath">Mount path</string>
+    <string name="emptyList">The list is empty. Please use the menu to add entry.</string>
+    <string name="add">Add</string>
+    <string name="mount">Mount</string>
+    <string name="mounting">Mounting...</string>
+    <string name="mountSuccess">Mount is successfull.</string>
+    <string name="mountFail">Mount failed!</string>
+    <string name="umount">Umount</string>
+    <string name="umountAll">Umount all</string>
+    <string name="umounting">Umounting...</string>
+    <string name="umountSuccess">Umount is successfull.</string>
+    <string name="umountFail">Umount failed!</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="password">Password</string>
+    <string name="needPassword">Please use valid password.</string>
+    <string name="umounting:">Umounting:</string>
+    <string name="umountConfirmMsg">Would you like umount really?</string>
+    <string name="deleting:">Deleting:</string>
+    <string name="deleteConfirmMsg">Would you like delete really?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="selectFile">Please select a file</string>
+    <string name="selectFolder">Please select a folder</string>
+    <string name="useFolder">Use this folder</string>
+    <string name="installOIFM">To search please install OI File Manager.</string>
+    <string name="search">Search</string>
+    <string name="existsMsg">This entry name already exists.</string>
+    <string name="emptyNameMsg">The name can not be empty.</string>
+    <string name="serviceNotify">Secure file system has been mounted.</string>
+</resources>
