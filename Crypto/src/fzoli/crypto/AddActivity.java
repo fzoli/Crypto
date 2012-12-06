@@ -24,6 +24,8 @@ public class AddActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	
 	private EditText etName, etFilePath, etMountPath;
 	
+	private boolean old;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -76,7 +78,7 @@ public class AddActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			startActivityForResult(intent, code);
 		}
 		catch (Exception e) {
-			Toast.makeText(this, getString(R.string.installOIFM), Toast.LENGTH_LONG);
+			showToast(getString(R.string.installOIFM));
 			openMarketOIFM();
 		}
 	}
@@ -131,9 +133,13 @@ public class AddActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private void fillEditTexts() {
 		ListEntry e = getEntry();
 		if (e != null) {
+			old = true;
 			etName.setText(e.getName());
 			etFilePath.setText(e.getFilePath());
 			etMountPath.setText(e.getMountPath());
+		}
+		else {
+			old = false;
 		}
 	}
 	
@@ -148,7 +154,7 @@ public class AddActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			public void onClick(View arg0) {
 				ListEntry entry = createEntry();
 				boolean validName = entry.getName().length() > 0;
-				if (validName && !contains(entry)) {
+				if (validName && (old || !contains(entry))) {
 					Intent i = new Intent();
 					i.putExtra(CryptoActivity.ENTRY, entry);
 					setResult(OK, i);

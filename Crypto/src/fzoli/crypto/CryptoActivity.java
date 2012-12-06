@@ -28,7 +28,7 @@ import fzoli.view.ThreadIndicator;
 import fzoli.view.ThreadIndicatorAction;
 
 public class CryptoActivity extends OrmLiteBaseListActivity<DatabaseHelper> {
-	
+	 
 	public static final String ENTRY = "entry";
 	public static final String ENTRY_STORAGE = "entry_storage";
 	public static final String ENTRY_MOUNTED = "entry_mounted";
