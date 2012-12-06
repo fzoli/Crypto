@@ -2,7 +2,9 @@
 <resources>
     <string name="app_name">Crypto</string>
     <string name="sdShared">SD-card is shared!</string>
-    <string name="needCryptsetup">/data/local/cryptsetup not found</string>
+    <string name="needCryptsetup">The cryptsetup binary not found</string>
+    <string name="installedCryptsetup">Binary file was installed</string>
+    <string name="notInstalledCryptsetup">Binary file can not be installed</string>
     <string name="listname">Listname</string>
     <string name="filePath">File path</string>
     <string name="mountPath">Mount path</string>

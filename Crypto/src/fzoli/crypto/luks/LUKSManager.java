@@ -10,17 +10,25 @@ public class LUKSManager {
 	
 	private final LoopbackLogger LOGGER;
 	
-	public LUKSManager(LoopbackLogger logger) {
+	private final String CRYPTSETUP;
+	
+	public LUKSManager(LoopbackLogger logger, String cryptsetup) {
 		this.LOGGER = logger;
+		this.CRYPTSETUP = cryptsetup;
 	}
 	
 	public boolean isBinaryExists() {
-		return new File("/data/local/cryptsetup").exists();
+		return new File(CRYPTSETUP).exists();
 	}
 	
 	private String findFreeLoopbackDevice() {
-		String device = ShellUtils.execute("losetup -f", false).getOutput();
-		return device.substring(0, device.length() - 1);
+		try {
+			String device = ShellUtils.execute("losetup -f", false).getOutput();
+			return device.substring(0, device.length() - 1);
+		}
+		catch (Exception ex) {
+			return null;
+		}
 	}
 	
 	private String createMapperName(String filePath) {
@@ -63,7 +71,7 @@ public class LUKSManager {
 		if (isBinaryExists() && isUsed(mapper)) {
 			boolean umounted = ShellUtils.execute(new String[] {
 					"umount /dev/mapper/" + mapper,
-					"/data/local/cryptsetup luksClose " + mapper,
+					CRYPTSETUP + " luksClose " + mapper,
 					"losetup -d " + LOGGER.getLog(mapper)
 			}, true).isSuccess();
 			if (umounted) LOGGER.removeLog(mapper);
@@ -88,12 +96,13 @@ public class LUKSManager {
 		String mapper = createMapperName(filePath);
 		if (!isBinaryExists() || (!isPathsExists(filePath, mountPath) && !isUsed(mapper))) return false;
 		String loDevice = findFreeLoopbackDevice();
+		if (loDevice == null) return false;
 		boolean prepared = ShellUtils.execute(new String[] {
 			"mknod " + loDevice + " b 7 " + loDevice.substring(9),
 			"losetup " + loDevice + " " + filePath
 			}, true).isSuccess();
 		if (prepared) {
-			if (ShellUtils.execute("/data/local/cryptsetup luksOpen " + loDevice + " " + mapper, password, 20000, true)) {
+			if (ShellUtils.execute(CRYPTSETUP + " luksOpen " + loDevice + " " + mapper, password, 20000, true)) {
 				if (ShellUtils.execute("mount /dev/mapper/" + mapper + " " + mountPath, true).isSuccess()) {
 					LOGGER.addLog(mapper, loDevice);
 					return true;

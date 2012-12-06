@@ -2,7 +2,9 @@
 <resources>
     <string name="app_name">Crypto</string>
     <string name="sdShared">Az SD-kártya meg van osztva!</string>
-    <string name="needCryptsetup">/data/local/cryptsetup nem található</string>
+    <string name="needCryptsetup">A cryptsetup bináris fájl nem található</string>
+    <string name="installedCryptsetup">A bináris fájl sikeresen települt</string>
+    <string name="notInstalledCryptsetup">A bináris fájlt nem sikerült telepíteni</string>
     <string name="listname">Listanév</string>
     <string name="filePath">Fájl útvonala</string>
     <string name="mountPath">Felcsattolás útvonala</string>

@@ -181,7 +181,7 @@ public class CryptoService extends OrmLiteBaseService<DatabaseHelper> {
 	}
 
 	private void createLUKSManager() {
-		luksManager = new LUKSManager(new LoopbackLogger(getHelper().getLoopbackLogDao()));
+		luksManager = new LUKSManager(new LoopbackLogger(getHelper().getLoopbackLogDao()), getFileStreamPath("cryptsetup").getAbsolutePath());
 	}
 	
 	private void removeUmountedEntries() {

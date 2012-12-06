@@ -1,8 +1,11 @@
 package fzoli.crypto;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,7 +19,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
+
 import fzoli.crypto.database.DatabaseHelper;
 import fzoli.crypto.database.ListEntry;
 import fzoli.crypto.luks.LUKSManager;
@@ -28,8 +33,9 @@ import fzoli.view.ThreadIndicator;
 import fzoli.view.ThreadIndicatorAction;
 
 public class CryptoActivity extends OrmLiteBaseListActivity<DatabaseHelper> {
-	 
+	
 	public static final String ENTRY = "entry";
+	public static final String CRYPTSETUP = "cryptsetup";
 	public static final String ENTRY_STORAGE = "entry_storage";
 	public static final String ENTRY_MOUNTED = "entry_mounted";
 	public static final String ENTRY_UMOUNTED = "entry_umounted";
@@ -185,8 +191,25 @@ public class CryptoActivity extends OrmLiteBaseListActivity<DatabaseHelper> {
 		}, getString(R.string.mounting), getString(R.string.mountSuccess), getString(R.string.mountFail));
     }
     
-    private void showBinaryMsg() {
+    private void setBinaryFile() {
     	showToas(getString(R.string.needCryptsetup));
+    	try {
+    		int length;
+    		byte[] buffer = new byte[1024];
+    		InputStream in = getAssets().open(CRYPTSETUP);
+    		OutputStream out = openFileOutput(CRYPTSETUP, MODE_PRIVATE);
+    		getFileStreamPath(CRYPTSETUP).setExecutable(true);
+    		while ((length = in.read(buffer)) != -1) {
+    			out.write(buffer, 0, length);
+    		}
+    		out.flush();
+    		out.close();
+    		in.close();
+    		showToas(getString(R.string.installedCryptsetup));
+    	}
+    	catch (Exception ex) {
+    		showToas(getString(R.string.notInstalledCryptsetup));
+    	}
     }
     
     private void showSdSharedMsgIfNeed() {
@@ -197,7 +220,7 @@ public class CryptoActivity extends OrmLiteBaseListActivity<DatabaseHelper> {
     }
     
     private void showChooseDialog(final ListEntry entry) {
-    	if (!luksManager.isBinaryExists() && luksManager.isPathsExists(entry)) showBinaryMsg();
+    	if (!luksManager.isBinaryExists() && luksManager.isPathsExists(entry)) setBinaryFile();
     	final CharSequence[] items = createListItemOptions(entry);
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
     	builder.setTitle(entry.getName());
@@ -287,13 +310,13 @@ public class CryptoActivity extends OrmLiteBaseListActivity<DatabaseHelper> {
     
     private void initDbObjects() {
 		DatabaseHelper helper = getHelper();
-        luksManager = new LUKSManager(new LoopbackLogger(helper.getLoopbackLogDao()));
+        luksManager = new LUKSManager(new LoopbackLogger(helper.getLoopbackLogDao()), getFileStreamPath(CRYPTSETUP).getAbsolutePath());
         listLogger = new ListEntryLogger(helper.getListEntryDao());
 	}
 	
     private void showInitMessages() {
     	showSdSharedMsgIfNeed();
-    	if (!luksManager.isBinaryExists()) showBinaryMsg();
+    	if (!luksManager.isBinaryExists()) setBinaryFile();
     }
     
 	private void initList() {
