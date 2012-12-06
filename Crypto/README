@@ -1,2 +1,1 @@
-- A program csak rootolt készülékeken működik és a tallózáshoz a CyanogenMod ROM fájlkezelője, vagy az OI File Manager szükséges.
-- A cryptsetup programot a telefonra kell másolni a "/data/local" könyvtárba és futási jogot kell neki adni, hogy működjön a mount és umount.
+A program csak rootolt készülékeken működik és a tallózáshoz a CyanogenMod ROM fájlkezelője, vagy az OI File Manager szükséges.
